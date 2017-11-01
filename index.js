@@ -7,10 +7,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
-  console.log('Request URL:', req.originalUrl);
-  next();
+  if (req.method === 'GET') {
+    console.log('Request Type:', req.method);
+    next();
+  } else {
+    console.log('Method are not GET');
+  }
 }, (req, res, next) => {
-  console.log('Request Type:', req.method);
+  console.log('Request URL:', req.originalUrl);
   next();
 });
 
